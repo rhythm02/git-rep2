@@ -24,13 +24,26 @@ public class HotelBookingTest {
     public void testFindCheapestHotel(){
 
         List<String> dates = new ArrayList<String>();
-
         dates.add("01/16/2019");
         dates.add("01/17/2019");
         dates.add("01/19/2019");
+        dates.add("02/20/2019");
 
+        request = new Request(Customer.REGULAR, dates);
 
+        HotelBooking booking = new HotelBooking();
+        Hotel hotel= booking.findCheapestHotel(request,hotelList);
 
+        System.out.println(hotel.getName());
+    }
+
+    @Test
+    public void testFindCheapestHotel2(){
+
+        List<String> dates = new ArrayList<String>();
+        dates.add("02/15/2019");
+        dates.add("02/16/2019");
+        dates.add("02/17/2019");
 
         request = new Request(Customer.REWARD, dates);
 
@@ -38,9 +51,6 @@ public class HotelBookingTest {
         Hotel hotel= booking.findCheapestHotel(request,hotelList);
 
         System.out.println(hotel.getName());
-
-
-
     }
 
 }

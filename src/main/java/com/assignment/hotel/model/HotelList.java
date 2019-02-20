@@ -1,8 +1,10 @@
 package com.assignment.hotel.model;
 
+import com.assignment.hotel.utility.DateToDay;
 import lombok.Getter;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -41,6 +43,34 @@ public class HotelList{
             hotels.add(bridgewood);
             hotels.add(ridgewood);
         }
+        
+        public int findTotalCost(Hotel hotel, Request request){
+            int cost=0;
+            int totalCost=0;
+            Map<Category, Integer> map = hotel.getMap();
 
+            for (String date:request.listDates
+            ) {
+                int day = new DateToDay().getDay(date);
+                if(day >= Calendar.MONDAY && day <= Calendar.FRIDAY){
+                    if(request.getCustomerType().equals(Customer.REGULAR)) {
+                        cost = map.get(new Category(Customer.REGULAR, Days.WEEKDAY));
+                    }
+                    else {
+                        cost = map.get(new Category(Customer.REWARD, Days.WEEKDAY));
+                    }
+                }
+                else{
+                    if(request.getCustomerType().equals(Customer.REGULAR)) {
+                        cost = map.get(new Category(Customer.REGULAR, Days.WEEKEND));
+                    }
+                    else {
+                        cost = map.get(new Category(Customer.REWARD, Days.WEEKEND));
+                    }
+                }
+                totalCost = totalCost+cost;
+            }
+            return totalCost;
+        }
 
 }
