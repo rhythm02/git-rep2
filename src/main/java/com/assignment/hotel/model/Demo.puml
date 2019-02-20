@@ -1,0 +1,30 @@
+@startuml
+
+abstract class AbstractList
+abstract AbstractCollection
+interface List
+interface Collection
+
+List <|-- AbstractList
+Collection <|-- AbstractCollection
+
+Collection <|- List
+AbstractCollection <|- AbstractList
+AbstractList <|-- ArrayList
+
+class Category {
+Customer customer
+Days days
+}
+
+enum days{
+WEEKDAY, WEEKEND
+}
+
+enum Customer{
+REGULAR, REWARD
+}
+
+
+
+@enduml
